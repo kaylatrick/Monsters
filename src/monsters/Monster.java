@@ -7,7 +7,7 @@ abstract public class Monster {
 	
 	public static Random r = new Random();
 
-	private String name;
+	private static String name;
 	public int health = 10;
 	private int attackPower;
 //	public static int activeDamage = r.nextInt(10);
@@ -19,17 +19,17 @@ abstract public class Monster {
 	public static void loop(Hero hercules, Monster activeMonster) {
 		while (hercules.health > 0 && activeMonster.health > 0) {
 			hercules.attack(activeMonster);
-			System.out.println(activeMonster + " has been hit.");
-			System.out.println("Hercules score: " + hercules.health + " " + activeMonster + " score: " + activeMonster.health);
+			System.out.println(name + " has been hit.");
+			System.out.println("Hercules score: " + hercules.health + " " + name + " score: " + activeMonster.health);
 			if(activeMonster.health <= 0) {
 				break;
 			}
 			activeMonster.attack(hercules);
 			System.out.println("Hercules has been hit.");
-			System.out.println("Hercules score: " + hercules.health + " " + activeMonster + " score: " + activeMonster.health);
+			System.out.println("Hercules score: " + hercules.health + " " + name + " score: " + activeMonster.health);
 		}
 		if(activeMonster.health <= 0) {
-			System.out.println(activeMonster + " was defeated!");
+			System.out.println(name + " was defeated!");
 		} else {
 			System.out.println("Hercules was defeated!");
 		}
@@ -43,6 +43,13 @@ abstract public class Monster {
 		creatures[1] = new Ogre();
 		creatures[2] = new Goblin();
 		Monster activeMonster = creatures[Monster.r.nextInt(3)];
+		if(Monster.r.nextInt(3) == 0) {
+			name = "Rat";
+		} else if(Monster.r.nextInt(3) == 1) {
+			name = "Ogre";
+		} else {
+			name = "Goblin";
+		}
 //		System.out.println(activeMonster);
 //		System.out.println(activeDamage);
 //		System.out.println(hercules.health);
